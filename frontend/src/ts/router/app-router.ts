@@ -3,27 +3,25 @@
 // Importing it creates the router - tests use createAppRouter instead
 
 import * as AdController from "../controllers/ad-controller";
-import { signOut } from "../auth";
-import { getUserDataLoadState, reloadUserData } from "../session-data";
 import { queryClient } from "../queries";
-import { getAuthState } from "../states/core";
 import { getRoutePage } from "../states/router";
 import { setFocusMode } from "../states/test";
 import type { PageName } from "./routes";
 import { updateTitle } from "../utils/misc";
 import { capitalizeFirstLetterOfEachWord } from "../utils/strings";
-import { createRouterAuth } from "./create-router-auth";
+import type { RouterAuth } from "./create-router-auth";
 import { createAppRouter } from "./create-router";
 import { setRouter } from "./instance";
 
-const auth = createRouterAuth({
-  // This deployment is guest-only; authentication is permanently unavailable.
+// Guest-only router: never load account sessions or Firebase authentication.
+const auth: RouterAuth = {
   isAvailable: () => false,
-  authState: getAuthState,
-  userDataLoadState: getUserDataLoadState,
-  reloadUserData,
-  signOut,
-});
+  isSignedIn: () => false,
+  waitForFirstState: async () => undefined,
+  userDataDownload: () => undefined,
+  onChange: () => () => undefined,
+  signOut: () => undefined,
+};
 
 export const router = createAppRouter({ queryClient, auth });
 
