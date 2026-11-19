@@ -11,13 +11,11 @@ import {
 
 import { getConfig } from "../../../../config/store";
 import { useRefWithUtils } from "../../../../hooks/useRefWithUtils";
-import { getUserData } from "../../../../queries/user";
 import { getAdBlock, getCookieBlocker } from "../../../../states/ads";
 import { getIsScreenshotting } from "../../../../states/core";
 import { getGlarsesMode } from "../../../../states/glarses-mode";
-import { resultState } from "../../../../states/result";
 import { getFrozenLog, getLastResult } from "../../../../states/test";
-import { restartTest, retrySavingResult } from "../../../../test/test-logic";
+import { restartTest } from "../../../../test/test-logic";
 import { registerFade } from "../../../../test/test-page-bridge";
 import { cn } from "../../../../utils/cn";
 import {
@@ -28,7 +26,6 @@ import { AdIcon } from "../../../common/AdIcon";
 import { adSlotClass, adSlotRef } from "../../../common/Advertisement";
 import { Button } from "../../../common/Button";
 import { Fa } from "../../../common/Fa";
-import { UserFlags } from "../../../common/UserFlags";
 import { ResultButtons } from "./ResultButtons";
 import { ResultChart } from "./ResultChart";
 import { ResultMainStats } from "./ResultMainStats";
@@ -120,7 +117,6 @@ export function TestResult(): JSXElement {
               <ResultSecondaryStats result={test().result} />
               <ResultWordsHistory eventLog={test().eventLog} />
               <ResultReplay />
-              <RetrySavingButton />
             </Show>
             <div
               ref={(el) => (prefocusRef = el)}
@@ -138,23 +134,6 @@ export function TestResult(): JSXElement {
   );
 }
 
-function RetrySavingButton(): JSXElement {
-  return (
-    <Show when={resultState.canRetrySaving}>
-      <div class="grid w-full justify-center">
-        <Button
-          type="button"
-          class="mb-4 justify-self-center bg-error px-8 py-4 text-bg"
-          id="retrySavingResultButton"
-          onClick={() => void retrySavingResult()}
-          text="Retry saving result"
-          fa={{ icon: "fa-redo" }}
-        />
-      </div>
-    </Show>
-  );
-}
-
 function Watermark(): JSXElement {
   return (
     <Show when={getIsScreenshotting()}>
@@ -163,17 +142,6 @@ function Watermark(): JSXElement {
         const date = format(new Date(), "dd MMM yyyy HH:mm");
         return (
           <div class="col-span-full flex flex-wrap justify-end gap-x-[1em] text-[1.25rem] text-sub [&_.fas]:ml-[0.33em]">
-            <Show when={getUserData()}>
-              {(user) => (
-                <>
-                  <span>
-                    {user().name}
-                    <UserFlags {...user()} iconsOnly />
-                  </span>
-                  <span>|</span>
-                </>
-              )}
-            </Show>
             <span>{date}</span>
             <span>|</span>
             <span>monkeytype.com</span>
