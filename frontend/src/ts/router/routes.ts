@@ -21,7 +21,6 @@ import { AccountSettingsPage } from "../components/pages/account-settings/Accoun
 import { AccountPage } from "../components/pages/account/AccountPage";
 import { FriendsPage } from "../components/pages/connections/FriendsPage";
 import { LeaderboardPage } from "../components/pages/leaderboard/LeaderboardPage";
-import { LoginPage } from "../components/pages/login/LoginPage";
 import { createRouterPage } from "../components/core/Page";
 import { ProfilePage } from "../components/pages/profile/ProfilePage";
 import { ProfileSearchPage } from "../components/pages/profile/ProfileSearchPage";
@@ -301,18 +300,6 @@ const settings = createRoute({
   validateSearch: SettingsSearchSchema,
 });
 
-const login = createRoute({
-  getParentRoute: () => userDataRoute,
-  path: "/login",
-  staticData: { page: "login" },
-  component: createRouterPage(LoginPage),
-  beforeLoad: ({ context }) => signedOutOnly(context.auth),
-  // background data: start the fetch, the page shows its section loaders
-  loader: ({ context: { queryClient } }) => {
-    void queryClient.query(getServerConfigurationQueryOptions()).catch(noop);
-  },
-});
-
 const account = createRoute({
   getParentRoute: () => userDataRoute,
   path: "/account",
@@ -415,7 +402,6 @@ export const routeTree = root.addChildren([
     leaderboards,
     about,
     settings,
-    login,
     account,
     accountSettings,
     profileSearch,
