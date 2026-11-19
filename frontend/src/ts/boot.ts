@@ -1,4 +1,5 @@
 import { applyEngineSettings } from "./anim";
+import * as ServerConfiguration from "./ape/server-configuration";
 import { loadFromLocalStorage } from "./config/lifecycle";
 import * as Cookies from "./cookies";
 import * as MerchBanner from "./elements/merch-banner";
@@ -39,6 +40,8 @@ export async function boot(): Promise<void> {
 
   setAppReady(true);
 
+  // Preserve configuration startup until all backend consumers are migrated.
+  void ServerConfiguration.sync();
 
   registerServiceWorker();
 }
