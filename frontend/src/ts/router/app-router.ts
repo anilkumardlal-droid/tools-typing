@@ -5,7 +5,6 @@
 import * as AdController from "../controllers/ad-controller";
 import { signOut } from "../auth";
 import { getUserDataLoadState, reloadUserData } from "../session-data";
-import { isAuthAvailable } from "../firebase";
 import { queryClient } from "../queries";
 import { getAuthState } from "../states/core";
 import { getRoutePage } from "../states/router";
@@ -18,7 +17,8 @@ import { createAppRouter } from "./create-router";
 import { setRouter } from "./instance";
 
 const auth = createRouterAuth({
-  isAvailable: isAuthAvailable,
+  // This deployment is guest-only; authentication is permanently unavailable.
+  isAvailable: () => false,
   authState: getAuthState,
   userDataLoadState: getUserDataLoadState,
   reloadUserData,
