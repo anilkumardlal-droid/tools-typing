@@ -1566,7 +1566,7 @@ export const themes: Record<ThemeName, Theme> = {
     main: "#202124",
     sub: "#5F6368",
     subAlt: "#E9ECEF",
-    text: "#202124",
+    text: "#0D0D0D",
     error: "#C62828",
     errorExtra: "#8E1B1B",
     colorfulError: "#C62828",
