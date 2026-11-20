@@ -574,3 +574,11 @@ body.fb-arrows {
     }
   }
 }
+
+// Guest typing theme: readable feedback without changing the typing logic.
+#words:not(.flipped) {
+  --correct-letter-color: #4ADE80;
+  --untyped-letter-color: #A3B3CC;
+  --incorrect-letter-color: #FB7185;
+  --extra-letter-color: #FB7185;
+}
