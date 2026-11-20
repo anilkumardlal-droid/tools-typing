@@ -76,6 +76,19 @@ export async function applyConfig(
   //migrate old values if needed, remove additional keys and merge with default config
   const fullConfig: ConfigSchemas.Config = migrateConfig(partialConfig);
 
+  // Migrate previously saved theme choices to the supported Dark/Light pair.
+  // Keep unrelated typing preferences unchanged.
+  const previousTheme = fullConfig.theme;
+  fullConfig.theme = previousTheme === "paper" || previousTheme === "serika" ? "paper" : "dark";
+  fullConfig.themeLight = "paper";
+  fullConfig.themeDark = "dark";
+  fullConfig.customTheme = false;
+  fullConfig.autoSwitchTheme = false;
+  fullConfig.randomTheme = "off";
+  fullConfig.favThemes = fullConfig.favThemes.filter(
+    (name) => name === "dark" || name === "paper",
+  );
+
   configEvent.dispatch({ key: "fullConfigChange" });
 
   const configKeysToReset: (keyof ConfigSchemas.Config)[] = [];
