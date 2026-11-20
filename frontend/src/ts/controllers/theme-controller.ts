@@ -68,6 +68,10 @@ async function apply(
     isPreview,
   });
 
+  // Restrict all theme entry points, including saved themes and previews,
+  // to the two supported palettes.
+  themeName = themeName === "paper" || themeName === "serika" ? "paper" : "dark";
+
   const isCustom = themeName === "custom";
 
   const themeColors = isCustom
@@ -167,9 +171,9 @@ export async function clearPreview(applyTheme = true): Promise<void> {
 let themesList: (ThemeName | string)[] = [];
 
 async function changeThemeList(): Promise<void> {
-  const themes = ThemesList;
+  const themes = ThemesList.filter((theme) => theme.name === "dark" || theme.name === "paper");
   if (Config.randomTheme === "fav" && Config.favThemes.length > 0) {
-    themesList = Config.favThemes;
+    themesList = Config.favThemes.filter((name) => name === "dark" || name === "paper");
   } else if (Config.randomTheme === "light") {
     themesList = themes.filter((t) => isColorLight(t.bg)).map((t) => t.name);
   } else if (Config.randomTheme === "dark") {
@@ -179,7 +183,7 @@ async function changeThemeList(): Promise<void> {
       return t.name;
     });
   } else if (Config.randomTheme === "custom") {
-    themesList = getCustomThemes().map((ct) => ct._id);
+    themesList = ["dark", "paper"];
   }
   Arrays.shuffle(themesList);
   randomThemeIndex = 0;
