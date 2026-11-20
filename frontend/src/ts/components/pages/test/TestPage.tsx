@@ -245,6 +245,11 @@ export function TestPage(): JSXElement {
             hidden: isWordsWrapperHidden(),
           })}
           translate="no"
+          style={{
+            "background-color": "var(--sub-alt-color)",
+            "border-radius": "0.75rem",
+            "box-shadow": "inset 0 0 0 1px var(--sub-color)",
+          }}
           onClick={() => focusWordsEvent.dispatch({ force: false })}
         >
           <WordsInput />
