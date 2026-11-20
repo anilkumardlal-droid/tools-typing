@@ -10,15 +10,15 @@ import { Button } from "../../common/Button";
  * deliberately omitted; typing, settings and about keep their original UI. */
 export function Nav(): JSXElement {
   const buttonClass = () =>
-    cn("aspect-square", {
+    cn("whitespace-nowrap", {
       "opacity-(--nav-focus-opacity)": isFocusMode(),
     });
 
   return (
-    <nav class="z-5 flex w-full items-center gap-1 md:gap-2">
+    <nav class="z-5 flex w-full flex-wrap items-center justify-end gap-1 md:gap-2">
       <Button
         variant="text"
-        fa={{ icon: "fa-keyboard", fixedWidth: true }}
+        text="Typing Test"
         to="/"
         class={buttonClass()}
         dataset={{ "data-nav-item": "test" }}
@@ -28,14 +28,14 @@ export function Nav(): JSXElement {
       />
       <Button
         variant="text"
-        fa={{ icon: "fa-info", fixedWidth: true }}
+        text="About"
         to="/about"
         class={buttonClass()}
         dataset={{ "data-nav-item": "about" }}
       />
       <Button
         variant="text"
-        fa={{ icon: "fa-cog", fixedWidth: true }}
+        text="Settings"
         to="/settings"
         class={buttonClass()}
         dataset={{ "data-nav-item": "settings" }}
