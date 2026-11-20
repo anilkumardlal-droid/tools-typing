@@ -20,7 +20,7 @@ const isFavorite = (theme: ThemeWithName): boolean =>
 const createThemeCommand = (theme: ThemeWithName): Command => {
   return {
     id: `changeTheme${capitalizeFirstLetterOfEachWord(theme.name)}`,
-    display: theme.name.replace(/_/g, " "),
+    display: theme.name === "paper" ? "Light Mode" : "Dark Mode",
     configValue: theme.name,
     customData: {
       main: theme.main,
@@ -49,10 +49,14 @@ const sortThemesByFavorite = (themes: ThemeWithName[]): ThemeWithName[] => [
   ...themes.filter(not(isFavorite)),
 ];
 
+const allowedThemes = ThemesList.filter((theme) =>
+  theme.name === "dark" || theme.name === "paper",
+);
+
 const subgroup: CommandsSubgroup = {
   title: "Theme...",
   configKey: "theme",
-  list: sortThemesByFavorite(ThemesList).map((theme) =>
+  list: sortThemesByFavorite(allowedThemes).map((theme) =>
     createThemeCommand(theme),
   ),
 };
@@ -71,7 +75,9 @@ export function update(themes: ThemeWithName[]): void {
   subgroup.list = [];
 
   // rebuild with favorites first, then non-favorites
-  subgroup.list = sortThemesByFavorite(themes).map((theme) =>
+  subgroup.list = sortThemesByFavorite(themes.filter((theme) =>
+    theme.name === "dark" || theme.name === "paper",
+  )).map((theme) =>
     createThemeCommand(theme),
   );
 }
@@ -83,7 +89,7 @@ createRoot(() => {
     () => [...getConfig.favThemes],
     () => {
       try {
-        update(ThemesList);
+        update(allowedThemes);
       } catch (e: unknown) {
         console.error(
           getErrorMessage.createErrorMessage(
