@@ -247,55 +247,8 @@ export function Theme(): JSXElement {
       title={configMetadata.theme.displayString ?? "theme"}
       fa={configMetadata.theme.fa}
       description={configMetadata.theme.description}
-      inputs={
-        <div class="grid w-full grid-cols-2 gap-2">
-          <Button
-            onClick={() => setConfig("customTheme", false)}
-            active={!getConfig.customTheme}
-            text="preset"
-          />
-          <Button
-            onClick={() => setConfig("customTheme", true)}
-            active={getConfig.customTheme}
-            text="custom"
-          />
-        </div>
-      }
-      fullWidthInputs={
-        // <AnimeConditional
-        //   exitBeforeEnter
-        //   if={!getConfig.customTheme}
-        //   then={<Presets />}
-        //   else={<Customs />}
-        // />
-        // <AnimePresence exitBeforeEnter>
+      inputs={<Presets />}
 
-        //   </AnimePresence>
-        <AnimeSwitch
-          exitBeforeEnter
-          animeProps={{
-            initial: {
-              opacity: 0,
-              duration: 125,
-            },
-            animate: {
-              opacity: 1,
-              duration: 125,
-            },
-            exit: {
-              opacity: 0,
-              duration: 125,
-            },
-          }}
-        >
-          <AnimeMatch when={!getConfig.customTheme}>
-            <Presets />
-          </AnimeMatch>
-          <AnimeMatch when={getConfig.customTheme}>
-            <Customs />
-          </AnimeMatch>
-        </AnimeSwitch>
-      }
     />
   );
 }
