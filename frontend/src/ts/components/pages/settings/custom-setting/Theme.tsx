@@ -405,6 +405,7 @@ function ThemeButton(props: { theme: ThemeWithName }): JSXElement {
       )}
       onClick={() => {
         if (isActive()) return;
+        setConfig("customTheme", false);
         setConfig("theme", props.theme.name);
       }}
     >
