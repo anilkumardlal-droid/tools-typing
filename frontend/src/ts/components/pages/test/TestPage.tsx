@@ -248,7 +248,7 @@ export function TestPage(): JSXElement {
           style={{
             "background-color": "var(--sub-alt-color)",
             "border-radius": "0.75rem",
-            "box-shadow": "inset 0 0 0 1px var(--sub-color)",
+            "box-shadow": "inset 0 0 0 1px color-mix(in srgb, var(--sub-color) 22%, transparent)",
           }}
           onClick={() => focusWordsEvent.dispatch({ force: false })}
         >
