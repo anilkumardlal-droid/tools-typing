@@ -1,22 +1,14 @@
 import { Config, CustomThemeColors } from "@monkeytype/schemas/configs";
 
 const obj: Config = {
-  theme: "serika_dark",
-  themeLight: "serika",
-  themeDark: "serika_dark",
+  theme: "dark",
+  themeLight: "paper",
+  themeDark: "dark",
   autoSwitchTheme: false,
-  customTheme: true,
+  customTheme: false,
   customThemeColors: [
-    "#0B1730", // navy background
-    "#38BDF8", // sky blue accent
-    "#38BDF8", // caret
-    "#A3B3CC", // untyped text
-    "#172A46", // raised surfaces
-    "#F1F5F9", // general text
-    "#FB7185", // incorrect letters
-    "#BE123C", // extra incorrect letters
-    "#FB7185",
-    "#BE123C",
+    "#212121", "#FFFFFF", "#FFFFFF", "#BDBDBD", "#303030",
+    "#FFFFFF", "#FF6B6B", "#B83B3B", "#FF6B6B", "#B83B3B",
   ] as CustomThemeColors,
   favThemes: [],
   showKeyTips: true,
