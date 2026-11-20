@@ -5,18 +5,18 @@ const obj: Config = {
   themeLight: "serika",
   themeDark: "serika_dark",
   autoSwitchTheme: false,
-  customTheme: false,
+  customTheme: true,
   customThemeColors: [
-    "#323437",
-    "#e2b714",
-    "#e2b714",
-    "#646669",
-    "#2c2e31",
-    "#d1d0c5",
-    "#ca4754",
-    "#7e2a33",
-    "#ca4754",
-    "#7e2a33",
+    "#0B1730", // navy background
+    "#38BDF8", // sky blue accent
+    "#38BDF8", // caret
+    "#A3B3CC", // untyped text
+    "#172A46", // raised surfaces
+    "#F1F5F9", // general text
+    "#FB7185", // incorrect letters
+    "#BE123C", // extra incorrect letters
+    "#FB7185",
+    "#BE123C",
   ] as CustomThemeColors,
   favThemes: [],
   showKeyTips: true,
