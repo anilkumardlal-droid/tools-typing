@@ -11,8 +11,10 @@ import SlimSelect from "../../../ui/SlimSelect";
 import { SearchableSetting } from "../SearchableSetting";
 
 // built once - a new array on every read would make SlimSelect rebuild its options
-const themeOptions = ThemesList.map((theme) => ({
-  text: theme.name.replace(/_/g, " "),
+const themeOptions = ThemesList.filter(
+  (theme) => theme.name === "dark" || theme.name === "paper",
+).map((theme) => ({
+  text: theme.name === "paper" ? "light" : "dark",
   value: theme.name,
 }));
 
