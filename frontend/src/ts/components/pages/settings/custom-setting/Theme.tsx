@@ -33,7 +33,6 @@ import { showSimpleModal } from "../../../../states/simple-modal";
 import { getTheme, setTheme, updateThemeColor } from "../../../../states/theme";
 import { buildCustomThemeLink } from "../../../../url-actions/actions/custom-theme";
 import { cn } from "../../../../utils/cn";
-import { hexToHSL } from "../../../../utils/colors";
 import {
   normalizeName,
   replaceUnderscoresWithSpaces,
@@ -46,11 +45,9 @@ import { Separator } from "../../../common/Separator";
 import { ThemeBubbles } from "../../../common/ThemeBubbles";
 import { SearchableSetting } from "../SearchableSetting";
 
-export const sortedThemes: ThemeWithName[] = [...ThemesList].sort((a, b) => {
-  const b1 = hexToHSL(a.bg);
-  const b2 = hexToHSL(b.bg);
-  return b2.lgt - b1.lgt;
-});
+export const sortedThemes: ThemeWithName[] = ThemesList.filter(
+  (theme) => theme.name === "dark" || theme.name === "paper",
+).sort((a, b) => (a.name === "dark" ? -1 : b.name === "dark" ? 1 : 0));
 
 export function Theme(): JSXElement {
   const Presets = () => (
