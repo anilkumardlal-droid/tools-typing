@@ -1562,8 +1562,8 @@ export const themes: Record<ThemeName, Theme> = {
   },
   paper: {
     bg: "#FCFCFC",
-    caret: "#202124",
-    main: "#202124",
+    caret: "#0D0D0D",
+    main: "#0D0D0D",
     sub: "#5F6368",
     subAlt: "#E9ECEF",
     text: "#0D0D0D",
