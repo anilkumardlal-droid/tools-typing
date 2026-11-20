@@ -369,3 +369,11 @@ table {
     background-color: var(--sub-alt-color);
   }
 }
+
+// High-contrast footer links for the navy/sky-blue guest theme.
+footer a {
+  color: #7DD3FC;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+footer a:hover, footer a:focus-visible { color: #E0F2FE; }
