@@ -1561,7 +1561,7 @@ export const themes: Record<ThemeName, Theme> = {
     colorfulErrorExtra: "#c2386f",
   },
   paper: {
-    bg: "#F8F9FA",
+    bg: "#FCFCFC",
     caret: "#202124",
     main: "#202124",
     sub: "#5F6368",
